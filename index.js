@@ -2,10 +2,11 @@ import express from "express";
 //body parser...
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 //cors ....
 import cors from "cors";
 import postRoutes from "./routes/posts.js";
-
+dotenv.config();
 const app = express();
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
@@ -17,12 +18,10 @@ app.get("/", (req, res) => {
   res.send("Hello to Memories API");
 });
 
-const CONNECTION_URL =
-  "mongodb+srv://kevinbhavsar9:kevinbhavsar10@cluster0.8nqea.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 5000;
 
 mongoose
-  .connect(CONNECTION_URL, {
+  .connect(process.env.CONNECTION_URL, {
     //for avoiding error or warning
     useNewUrlParser: true,
     useUnifiedTopology: true,
